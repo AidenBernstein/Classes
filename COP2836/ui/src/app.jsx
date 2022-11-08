@@ -30,7 +30,7 @@ function IssueRow(props){
 }
 
 function IssueTable(props){
-    const issueRows = props.issues.map(issue => <IssueRow issue={issue} />)
+    const issueRows = props.issues.map(issue => <IssueRow key={issue.id} issue={issue} />);
 
     return (
         <table className="bordered-table">
@@ -90,7 +90,7 @@ class IssueAdd extends React.Component {
 
 async function graphQLFetch (query, variables = {}) {
     try {
-        const response = await fetch('/graphql', {
+        const response = await fetch(window.ENV.UI_API_ENDPOINT, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({query, variables})
